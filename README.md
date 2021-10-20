@@ -1,5 +1,8 @@
 # Node Base64 to File
 
+[![npm version](https://img.shields.io/npm/v/node-base64-to-file.svg?style=flat-square)](https://www.npmjs.com/package/node-base64-to-file)
+[![npm downloads](https://img.shields.io/npm/dm/node-base64-to-file.svg?style=flat-square)](https://www.npmjs.com/package/node-base64-to-file)
+
 **node-base64-to-file** is a light weight javascript `base64 string to file` conversion library for nodejs.
 
 ## Getting Started
@@ -58,6 +61,16 @@ base64toFile(
 ...
 
 ```
+
+## Arguments
+
+- `base64String` - This is a required filed which is simply an file in base64 representation
+- `option` - This is **optional** and can be `one` or `all` of the following properties
+  - `filePath` {string} - The directory path - Default: `./uploads`.
+  - `fileName` {string} - The name of the file excluding the extension - Default random name.
+  - `randomizeFileNameLength` {number} - Number of characters for the name to be created
+  - `types` {array} - Valid extensions e.g ['png','jpg','pdf'] - Default: ['jpg', 'jpeg', 'png']
+  - `fileMaxSize` {number} - the maximum number of bytes to base64 e.g 3145728
 
 ## Authors
 

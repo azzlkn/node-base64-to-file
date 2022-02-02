@@ -36,26 +36,28 @@ const base64String =
   'data:image/png;base64,iVBORw0KGgo...';
 
 // create an image with the a given name ie 'image'
-base64toFile(
-    base64String,
-    { filePath: './uploads', fileName: "image", types: ['png'], fileMaxSize: 3145728 },
-    (imgPath, error) => {
-      if(error) {
-          console.log(error.message)
-      }
-      console.log(imgPath)
-    },
-  );
+try {
+  const imagePath = await base64toFile(base64String, { filePath: './uploads', fileName: "image", types: ['png'], fileMaxSize: 3145728 });
+  console.log(imagePath)
+} catch (error) {
+  console.log(error)
+}
 
 // create an image with the a random name
-base64toFile(
-    base64String,
-    { filePath: './uploads', randomizeFileNameLength: 14, types: ['png'], fileMaxSize: 3145728 },
-    (imgPath, error) => {
-      if(error) {
-          console.log(error.message)
-      }
-      console.log(imgPath)
+try {
+  const imagePath = await base64toFile(base64String, { filePath: './uploads', randomizeFileNameLength: 14, types: ['png'], fileMaxSize: 3145728 });
+  console.log(imagePath)
+} catch (error) {
+  console.log(error)
+}
+
+// alternative usage
+base64toFile(base64String, { filePath: './uploads', fileName: "image", types: ['png'], fileMaxSize: 3145728 }).then(
+    (imagePath) => {
+      console.log(imagePath)
+    },
+    (error) => {
+      console.log(error.message)
     },
   );
 ...

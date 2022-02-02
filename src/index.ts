@@ -70,31 +70,32 @@ export default async (
     filePath?: string;
     fileMaxSize?: number;
   } | null,
-  callback: (res: string | null, err?: Error) => void,
 ) => {
-  try {
-    options = Object.assign({}, defaultFileOptions, options);
-    const decodedBase64 = await decodeBase64(base64);
-    if (!decodedBase64) {
-      return callback(null, new Error('Invalid base64 string!'));
-    }
-    if (options.fileMaxSize && decodedBase64.buffer.toString().length > options.fileMaxSize) {
-      return callback(null, new Error('File too large!'));
-    }
+  return new Promise(async (resolve, reject) => {
+    try {
+      options = Object.assign({}, defaultFileOptions, options);
+      const decodedBase64 = await decodeBase64(base64);
+      if (!decodedBase64) {
+        return reject(new Error('Invalid base64 string!'));
+      }
+      if (options.fileMaxSize && decodedBase64.buffer.toString().length > options.fileMaxSize) {
+        return reject(new Error('File too large!'));
+      }
 
-    if (options.types && !fileTypeControl(decodedBase64.type, options.types)) {
-      return callback(null, new Error('Invalid file type!'));
+      if (options.types && !fileTypeControl(decodedBase64.type, options.types)) {
+        return reject(new Error('Invalid file type!'));
+      }
+      const createdFile = await writeBase64ToDisk(decodedBase64.buffer, {
+        ...options,
+        fileExtention: decodedBase64.type.split('/')[1],
+      });
+      if (createdFile.status) {
+        return resolve(createdFile.data);
+      } else {
+        return reject(new Error(createdFile.message));
+      }
+    } catch (e: any) {
+      return reject(new Error(e.message));
     }
-    const createdFile = await writeBase64ToDisk(decodedBase64.buffer, {
-      ...options,
-      fileExtention: decodedBase64.type.split('/')[1],
-    });
-    if (createdFile.status) {
-      return callback(createdFile.data);
-    } else {
-      return callback(null, new Error(createdFile.message));
-    }
-  } catch (e: any) {
-    return callback(null, new Error(e.message));
-  }
+  });
 };

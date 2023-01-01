@@ -1,6 +1,6 @@
 {
   "name": "node-base64-to-file",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "NodeJs Base64 to File",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

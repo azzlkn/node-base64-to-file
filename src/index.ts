@@ -59,7 +59,7 @@ const writeBase64ToDisk = async (base64Buffer: Buffer, options: any) => {
     }
   }
 };
-export default async function (
+async function base64toFile(
   base64: string,
   options: {
     types?: string[];
@@ -97,3 +97,8 @@ export default async function (
     }
   });
 }
+
+export default base64toFile;
+// For CommonJS default export support
+module.exports = base64toFile;
+module.exports.default = base64toFile;

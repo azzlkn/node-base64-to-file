@@ -66,13 +66,16 @@ base64toFile(base64String, { filePath: './uploads', fileName: "image", types: ['
 
 ## Arguments
 
-- `base64String` - This is a required filed which is simply an file in base64 representation
-- `option` - This is **optional** and can be `one` or `all` of the following properties
-  - `filePath` {string} - The directory path - Default: `./uploads`.
-  - `fileName` {string} - The name of the file excluding the extension - Default random name.
-  - `randomizeFileNameLength` {number} - Number of characters for the name to be created
-  - `types` {array} - Valid extensions e.g ['png','jpg','pdf'] - Default: ['jpg', 'jpeg', 'png']
-  - `fileMaxSize` {number} - the maximum number of bytes to base64 e.g 3145728
+| Argument       | Type   | Required | Description                                                                                                                                                                                                                                           | Default                              |
+|----------------|--------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|
+| base64String   | string | Yes      | The base64 representation of a file.                                                                                                                                                                                                                    |                                      |
+| options        | object | No       | An object containing optional properties to customize the behavior of the `base64toFile` function.                                                                                                                                                  |                                      |
+| options.filePath | string | No       | The directory path where the file will be saved.                                                                                                                                                                                                        | `./uploads`                         |
+| options.fileName | string | No       | The name of the file (excluding the extension). If not specified, a random name will be generated.                                                                                                                                                    | Random name                         |
+| options.randomizeFileNameLength | number | No       | The number of characters in the random name.                                                                                                                                                                                                              |                                      |
+| options.types | array | No       | An array of valid file extensions (e.g. ['png', 'jpg', 'pdf']).                                                                                                                                                                                        | `['jpg', 'jpeg', 'png']`            |
+| options.fileMaxSize | number | No       | The maximum number of bytes that the base64 string can have.                                                                                                                                                                                           |                                      |
+
 
 ## Authors
 

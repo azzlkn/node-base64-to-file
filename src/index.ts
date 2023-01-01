@@ -50,7 +50,6 @@ const writeBase64ToDisk = async (base64Buffer: Buffer, options: any) => {
       await fs.promises.writeFile(path.resolve(filePath, fileName), base64Buffer, { encoding: 'base64' });
       return { status: true, data: fileName, message: 'File created.' };
     }
-
     return { status: false, data: null, message: 'No such file or directory' };
   } catch (e: any) {
     if (e.code === 'ENOENT') {
@@ -60,8 +59,7 @@ const writeBase64ToDisk = async (base64Buffer: Buffer, options: any) => {
     }
   }
 };
-
-export default async (
+export default async function (
   base64: string,
   options: {
     types?: string[];
@@ -70,7 +68,7 @@ export default async (
     filePath?: string;
     fileMaxSize?: number;
   } | null,
-) => {
+) {
   return new Promise(async (resolve, reject) => {
     try {
       options = Object.assign({}, defaultFileOptions, options);
@@ -98,4 +96,4 @@ export default async (
       return reject(new Error(e.message));
     }
   });
-};
+}
